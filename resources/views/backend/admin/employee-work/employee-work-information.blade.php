@@ -100,6 +100,7 @@
                             <th>หักอื่นๆ</th>
                             <th>หมายเหตุ</th>
                             <th>ยอดคงเหลือ</th>
+                            <th></th>
                         </tr>
                     </thead>
                     @foreach ($works as $work => $value)
@@ -189,6 +190,23 @@
                                 <td>{{$value->comment}}</td>
                                 <td></td>
                             @endif
+
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                        data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                            href="{{ url('/admin/edit-work-employee') }}/{{ $value->id }}"><i
+                                                class="bx bx-edit-alt me-1"></i> แก้ไขข้อมูล</a>
+                                        <a class="dropdown-item"
+                                            href="{{ url('/admin/delete-work-employee') }}/{{ $value->id }}"><i
+                                                class="bx bx-trash"></i> ลบข้อมูล</a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                     @endforeach

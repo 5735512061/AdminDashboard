@@ -56,8 +56,10 @@ Route::group(['prefix' => 'admin'], function(){
     // จัดการข้อมูลการทำงาน
     Route::get('/show-employee-work-by-branch/{id}','Backend\\AdminController@showEmployeeWorkByBranch');
     Route::get('/employee-work-information/{id}','Backend\\AdminController@employeeWorkInformation');
-    Route::get('/from-create-work','Backend\\AdminController@fromCreateWork');
     Route::post('/create-work','Backend\\AdminController@createWork');
+    Route::get('/delete-work-employee/{id}','Backend\\AdminController@deleteWorkEmployee');
+    Route::get('/edit-work-employee/{id}','Backend\\AdminController@editWorkEmployee');
+    Route::post('/update-work-employee','Backend\\AdminController@updateWorkEmployee');
 
     // จัดการข้อมูลวันลา และวันหยุดประจำปี
     Route::get('/leave-approval-by-branch/{id}','Backend\\AdminController@leaveApprovalByBranch');

@@ -424,10 +424,6 @@ class AdminController extends Controller
     }
 
     // จัดการข้อมูลการทำงาน
-    public function fromCreateWork() {
-        return view('backend/admin/employee-work/form-create-work');
-    }
-
     public function createWork(Request $request) {
         $employee_work = $request->all();
 
@@ -528,6 +524,25 @@ class AdminController extends Controller
                                                                             ->with('bonus',$bonus)
                                                                             ->with('funds',$funds)
                                                                             ->with('year_work',$year_work);
+    }
+
+    public function deleteWorkEmployee(Request $request, $id) {
+        EmployeeWork::findOrFail($id)->delete();
+        $request->session()->flash('alert-success', 'ลบข้อมูลสำเร็จ');
+        return back();
+    }
+
+    public function editWorkEmployee(Request $request, $id) {
+        $employee_work = EmployeeWork::findOrFail($id); 
+        return view('backend/admin/employee-work/edit-work-employee')->with('employee_work',$employee_work);
+    }
+
+    public function updateWorkEmployee(Request $request) {
+        $id = $request->get('id');
+        $employee_work = EmployeeWork::findOrFail($id);
+        $employee_work->update($request->all());
+        $request->session()->flash('alert-success', 'แก้ไขข้อมูลสำเร็จ');
+        return redirect()->action('Backend\\AdminController@employeeWorkInformation',['employee_id'=>$employee_work->employee_id]); 
     }
 
     // จัดการข้อมูลวันลา
