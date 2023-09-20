@@ -108,7 +108,6 @@
                     <tbody class="table-border-bottom-0">
                         @php
                             $month_equal = DB::table('salarys')->where('employee_id',$staff->id)->where('year',$value->year)->where('month_',$value->month_)->orderBy('id','desc')->value('month_');
-                            dd($month_equal);
                             // มีค่าเงินเดือน
                             $salary_equal = DB::table('salarys')->where('employee_id',$staff->id)->where('year',$value->year)->where('month_',$value->month_)->orderBy('id','desc')->value('salary');
                             
@@ -118,7 +117,6 @@
                         <tr>
                             <td>{{$NUM_PAGE*($page-1) + $work+1}}</td>
                             <td>
-                                {{$value->month_}} {{$month_equal}}
                                 @if($value->month_ == $month_equal)    
                                   {{number_format((float)$salary_equal)}} บาท
                                 @elseif($value->month_ != $month_equal)  
