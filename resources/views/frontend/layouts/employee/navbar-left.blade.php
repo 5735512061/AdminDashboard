@@ -54,6 +54,12 @@
                 <div data-i18n="Account">สวัสดิการพนักงาน</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{url('/staff/rules')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-book-bookmark"></i>
+                <div data-i18n="Account">กฎระเบียบของบริษัท</div>
+            </a>
+        </li>
         {{-- <li class="menu-header small text-uppercase"><span class="menu-header-text">ข้อมูลข่าวสาร / ใบเตือน</span></li>
         <li class="menu-item">
             <a href="{{url('#')}}" class="menu-link">

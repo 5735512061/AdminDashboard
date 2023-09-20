@@ -126,6 +126,9 @@ Route::group(['prefix' => 'staff'], function(){
     Route::get('/list-employee-evaluate','Frontend\\StaffController@listEmployeeEvaluate');
     Route::get('/from-employee-evaluate/{id}','Frontend\\StaffController@formEmployeeEvaluate');
     Route::post('/from-employee-evaluate','Frontend\\StaffController@formEmployeeEvaluatePost');
+
+    // กฎระเบียบของบริษัท
+    Route::get('/rules','Frontend\\StaffController@rules');
 });
 
 Auth::routes();

@@ -990,7 +990,7 @@ class AdminController extends Controller
             'amphoe' => 'required',
             'province' => 'required',
             'zipcode' => 'required',
-            'employee_name' => 'required',
+            'employee_name' => 'required|unique:employees',
             'password_name' => 'required',
         ];
     }
@@ -1010,6 +1010,7 @@ class AdminController extends Controller
             'province.required' => 'กรุณากรอกจังหวัด',
             'zipcode.required' => 'กรุณากรอกรหัสไปรษณีย์',
             'employee_name.required' => 'กรุณากรอกชื่อเข้าใช้งาน',
+            'employee_name.unique' => 'ชื่อเข้าใช้งานห้ามซ้ำกับในระบบ กรุณากรอกชื่อเข้าใช้งานใหม่',
             'password_name.required' => 'กรุณาตั้งรหัสเพื่อเข้าสู่ระบบ',
         ];
     }

@@ -395,4 +395,8 @@ class StaffController extends Controller
         return redirect()->action('Frontend\\StaffController@listEmployeeEvaluate');
     }
 
+    public function rules() {
+        return view('frontend/company/rules');
+    }
+
 }
