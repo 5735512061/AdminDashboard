@@ -28,6 +28,7 @@
                   <th>เบี้ยขยัน</th>
                   <th>ค่าประกันสังคม</th>
                   <th>หักอื่นๆ</th>
+                  <th>ค่าความสามารถ</th>
                   <th>หมายเหตุ</th>
                   <th>ยอดคงเหลือ</th>
                   <th></th>
@@ -72,6 +73,7 @@
                   @endif
                   <td>- <?php echo (DB::table('employee_works')->where('employee_id',$value->id)->orderBy('id','desc')->value('insurance'));?></td>
                   <td>- <?php echo (DB::table('employee_works')->where('employee_id',$value->id)->orderBy('id','desc')->value('deduct'));?></td>
+                  <td>+ <?php echo (DB::table('employee_works')->where('employee_id',$value->id)->orderBy('id','desc')->value('skill'));?></td>
                   <td><?php echo (DB::table('employee_works')->where('employee_id',$value->id)->orderBy('id','desc')->value('comment'));?></td>
                   @if($salary != NULL)
                     @php
@@ -91,10 +93,14 @@
                       $deduct = str_replace(',','',$deduct);
                       $deduct = (int)$deduct;
 
+                      $skill = DB::table('employee_works')->where('employee_id',$value->id)->orderBy('id','desc')->value('skill');
+                      $skill = str_replace(',','',$skill);
+                      $skill = (int)$skill;
+
                       if($late == 0 && $absence == 0)
-                        $salary = (($salary+1000)+($charge))-$insurance-$deduct;
+                        $salary = (($salary+1000)+($charge)+($skill))-$insurance-$deduct;
                       elseif($late != 0 || $absence != 0)
-                      $salary = ($salary+$charge)-$insurance-$deduct;
+                      $salary = ($salary+$charge+$skill)-$insurance-$deduct;
                       $salary = number_format($salary);
                     @endphp
                   @endif
@@ -158,6 +164,10 @@
                               <div class="col-md-6 mb-3">
                                 <label class="form-label">หักอื่นๆ</label>
                                 <input type="text" name="deduct" class="form-control" value="0" style="font-family:'Sarabun';"/>
+                              </div>
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label">ค่าความสามารถ</label>
+                                <input type="text" name="skill" class="form-control" value="0" style="font-family:'Sarabun';"/>
                               </div>
                               <div class="col-md-6 mb-3"></div>
                               <div class="col-md-12 mb-3">

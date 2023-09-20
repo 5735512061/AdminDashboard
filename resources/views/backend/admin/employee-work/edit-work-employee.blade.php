@@ -69,6 +69,11 @@
                                     <input type="text" name="deduct" class="form-control" value="{{$employee_work->deduct}}"
                                         style="font-family:'Sarabun';" />
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">ค่าความสามารถ</label>
+                                    <input type="text" name="skill" class="form-control" value="{{$employee_work->skill}}"
+                                        style="font-family:'Sarabun';" />
+                                </div>
                                 <div class="col-md-6 mb-3"></div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">หมายเหตุ</label>

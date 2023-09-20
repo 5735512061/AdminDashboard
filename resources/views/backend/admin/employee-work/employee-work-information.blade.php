@@ -98,6 +98,7 @@
                             <th>เบี้ยขยัน</th>
                             <th>ค่าประกันสังคม</th>
                             <th>หักอื่นๆ</th>
+                            <th>ค่าความสามารถ</th>
                             <th>หมายเหตุ</th>
                             <th>ยอดคงเหลือ</th>
                             <th></th>
@@ -107,6 +108,7 @@
                     <tbody class="table-border-bottom-0">
                         @php
                             $month_equal = DB::table('salarys')->where('employee_id',$staff->id)->where('year',$value->year)->where('month_',$value->month_)->orderBy('id','desc')->value('month_');
+                            dd($month_equal);
                             // มีค่าเงินเดือน
                             $salary_equal = DB::table('salarys')->where('employee_id',$staff->id)->where('year',$value->year)->where('month_',$value->month_)->orderBy('id','desc')->value('salary');
                             
@@ -116,6 +118,7 @@
                         <tr>
                             <td>{{$NUM_PAGE*($page-1) + $work+1}}</td>
                             <td>
+                                {{$value->month_}} {{$month_equal}}
                                 @if($value->month_ == $month_equal)    
                                   {{number_format((float)$salary_equal)}} บาท
                                 @elseif($value->month_ != $month_equal)  
@@ -142,24 +145,31 @@
                             @endif
                             <td>- {{$value->insurance}}</td>
                             <td>- {{$value->deduct}}</td>
-
+                            <td>+ {{$value->skill}}</td>
 
                             {{-- มีค่าเงินเดือน --}}
                             @php 
                                 $salary_equal = DB::table('salarys')->where('employee_id',$staff->id)->where('year',$value->year)->where('month_',$value->month_)->orderBy('id','desc')->value('salary');
                                 $salary_equal = str_replace(',','',$salary_equal);
                                 $salary_equal = (int)$salary_equal;
+
                                 $charge = str_replace(',','',$value->charge);
                                 $charge = (int)$charge;
+
                                 $insurance = str_replace(',','',$value->insurance);
                                 $insurance = (int)$insurance;
+
                                 $deduct = str_replace(',','',$value->deduct);
                                 $deduct = (int)$deduct;
+
+                                $skill = str_replace(',','',$value->skill);
+                                $skill = (int)$skill;
+
                                 if($value->late == 0 && $value->absence == 0)
-                                $salary_equal = (($salary_equal+1000)+($charge))-$insurance-$deduct;
+                                    $salary_equal = (($salary_equal+1000)+($charge)+($skill))-$insurance-$deduct;
                                 elseif($value->late != 0 || $value->absence != 0)
-                                $salary_equal = ($salary_equal+$charge)-$insurance-$deduct;
-                                $salary_equal = number_format($salary_equal);
+                                    $salary_equal = ($salary_equal+$charge+$skill)-$insurance-$deduct;
+                                    $salary_equal = number_format($salary_equal);
                             @endphp
 
                             {{-- ไม่มีค่าเงินเดือน --}}
@@ -167,17 +177,24 @@
                                     $salary = DB::table('salarys')->where('employee_id',$staff->id)->where('year',$value->year)->where('month_','<',$value->month_)->orderBy('id','desc')->value('salary');
                                     $salary = str_replace(',','',$salary);
                                     $salary = (int)$salary;
+
                                     $charge = str_replace(',','',$value->charge);
                                     $charge = (int)$charge;
+
                                     $insurance = str_replace(',','',$value->insurance);
                                     $insurance = (int)$insurance;
+
                                     $deduct = str_replace(',','',$value->deduct);
                                     $deduct = (int)$deduct;
+
+                                    $skill = str_replace(',','',$value->skill);
+                                    $skill = (int)$skill;
+
                                     if($value->late == 0 && $value->absence == 0)
-                                    $salary = (($salary+1000)+($charge))-$insurance-$deduct;
+                                        $salary = (($salary+1000)+($charge)+($skill))-$insurance-$deduct;
                                     elseif($value->late != 0 || $value->absence != 0)
-                                    $salary = ($salary+$charge)-$insurance-$deduct;
-                                    $salary = number_format($salary);
+                                        $salary = ($salary+$charge+$skill)-$insurance-$deduct;
+                                        $salary = number_format($salary);
                             @endphp
 
                             @if($value->month_ == $month_equal)
