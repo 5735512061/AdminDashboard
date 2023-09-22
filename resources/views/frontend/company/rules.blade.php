@@ -4,9 +4,8 @@
         margin-left: 3rem;
     }
 
-    .rules h4{
-        line-height: 1.5rem;
-        font-size: 15px;
+    .rules h3{
+        text-align: center;
     }
 </style>
 @section("content")
@@ -18,8 +17,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="rules">
-                                <h3>กฎระเบียบพนักงานภายในบริษัท เอโดะ แสนล้าน จำกัด</h3><hr>ฃ
-                                <h4></h4>
+                                <h3>กฎระเบียบพนักงานภายในบริษัท เอโดะ แสนล้าน จำกัด</h3><hr>
+                                <iframe src="https://drive.google.com/file/d/1jEjh3Mtg4IzrTwJqo2prhkTYpw-bqZf1/preview" width="100%" height="800px" style="border:0;"></iframe>
                             </div>
                         </div>  
                     </div>
