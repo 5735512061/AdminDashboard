@@ -85,8 +85,10 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/create-form-employee-evaluate','Backend\\AdminController@createFormEmployeeEvaluate');
     Route::post('/edit-form-employee-evaluate','Backend\\AdminController@editFormEmployeeEvaluate');
     Route::get('/list-employee-evaluate/{branch_id}','Backend\\AdminController@listEmployeeEvaluate');
-    Route::get('/evaluate-detail/{id}','Backend\\AdminController@evaluateDetail');
+    Route::get('/evaluate-detail/{id}/{year}','Backend\\AdminController@evaluateDetailByYear');
     Route::get('/evaluate-form-detail/{id}/{date_d?}/{date_m?}/{date_y?}','Backend\\AdminController@evaluateFormDetail');
+    
+    Route::get('/evaluate-for-month/{id}','Backend\\AdminController@evaluateForMonth');
 
     Route::get('/form-manager-evaluate/{branch_id}','Backend\\AdminController@formManagerEvaluate');
     Route::post('/create-form-manager-evaluate','Backend\\AdminController@createFormManagerEvaluate');

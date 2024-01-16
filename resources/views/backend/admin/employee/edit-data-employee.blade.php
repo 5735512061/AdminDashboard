@@ -73,8 +73,14 @@
                     <label class="form-label">สาขาในเครือ</label>
                     @php
                         $branch = DB::table('branch_groups')->where('id',$employee->branch_id)->value('branch');
+                        $branchs = DB::table('branch_groups')->get();
                     @endphp
-                    <input class="form-control" type="text" name="branch" value="{{$branch}}" readonly style="background-color:#fff;"/>
+                    <select name="branch_id" class="select2 form-select">
+                        <option value="{{$employee->branch_id}}">{{$branch}}</option>          
+                      @foreach ($branchs as $branch => $value)
+                        <option value="{{$value->id}}">{{$value->branch}}</option>
+                      @endforeach
+                    </select>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label class="form-label" for="country">ตำแหน่งงาน</label>
@@ -167,7 +173,6 @@
                 <div class="mt-2">
                   <input type="hidden" name="id" value="{{$employee->id}}">
                   <button type="submit" class="btn btn-primary me-2" style="font-family: 'Sarabun';">บันทึกข้อมูล</button>
-                  <button type="reset" class="btn btn-outline-secondary" style="font-family: 'Sarabun';">ยกเลิก</button>
                 </div>
               </div>
             </div>

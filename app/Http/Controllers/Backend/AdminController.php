@@ -25,6 +25,8 @@ use App\Model\Warning;
 use App\Admin;
 use App\Employee;
 use Carbon\Carbon;
+use Datetime;
+use DB;
 
 use Input;
 use Response;
@@ -125,7 +127,6 @@ class AdminController extends Controller
     }
 
     public function editDataEmployeePost(Request $request) {
-        
         $id = $request->get('id');
         $employee = Employee::findOrFail($id);
 
@@ -193,7 +194,6 @@ class AdminController extends Controller
                 $employee->save();
             }
         }
-
         return redirect()->action('Backend\AdminController@showDataEmployeeByBranch',['branch_id' => $branch_id]); 
     }
 
@@ -837,23 +837,26 @@ class AdminController extends Controller
                                                                     ->with('branch_id',$branch_id);
     }
 
-    public function evaluateDetail(Request $request, $id) {
+    public function evaluateDetailByYear(Request $request, $id, $yearID) {
         $employee = Employee::findOrFail($id);
 
         $yearNow = Carbon::now()->format('Y'); //เพิ่มเปรียบเทียบปีปัจจุบัน
 
+        // $amounts = EmployeeRate::where('employee_id',$id)->groupBy('date')->orderBy('id','asc')->get();
+
         $rates = EmployeeRate::where('employee_id',$id)
-                             ->where('date', 'like', '%'.$yearNow) //เพิ่มเปรียบเทียบปีปัจจุบัน
-                            //  ->groupBy('date')
+                             ->groupBy('created_at')
                              ->selectRaw('*, sum(rate) as sum')
-                             ->orderBy('created_at','desc')
+                             ->orderBy('created_at','asc')
                              ->get();
         $year = EmployeeRate::where('employee_id',$id)->value('date');
         $year = strtr($year,'/','-');
         $year = date('Y',strtotime($year));
+
         return view('backend/admin/evaluate/employee-evaluate-detail')->with('employee',$employee)
                                                                       ->with('rates',$rates)
-                                                                      ->with('year',$year);
+                                                                      ->with('year',$year)
+                                                                      ->with('yearID',$yearID);
     }
 
     public function evaluateFormDetail(Request $request,$id,$date_d,$date_m,$date_y) {
@@ -871,6 +874,20 @@ class AdminController extends Controller
             }
         return view('backend/admin/evaluate/employee-evaluate-form-detail')->with('rates',$rates)
                                                                            ->with('sum',$sum);
+    }
+
+    public function evaluateForMonth(Request $request, $id) {
+        $employee = Employee::findOrFail($id);
+        $months = EmployeeRate::where('employee_id',$id)->groupBy('date')->orderBy('id','asc')->get();
+        $years = EmployeeRate::select(DB::raw('YEAR(created_at) year'))
+                            ->where('employee_id',$id)
+                            ->groupby('year')
+                            ->orderBy('id','asc')
+                            ->get();
+        return view('backend/admin/evaluate/employee-evaluate-for-month')->with('employee',$employee)
+                                                                         ->with('months',$months)
+                                                                         ->with('years',$years)
+                                                                         ->with('id',$id);
     }
     
     public function formManagerEvaluate(Request $request, $branch_id) { 

@@ -78,27 +78,27 @@
         @endphp
         @if($position == "MANAGER")
         <li class="menu-header small text-uppercase"><span class="menu-header-text">การประเมินผล</span></li>
-            @php
+            {{-- @php
                 $date_now = Carbon\Carbon::now()->format('d/m/Y');
                 $quarter_1  = '26/03/2023'; 
                 $quarter_2  = '26/06/2023'; 
                 $quarter_3  = '26/09/2023'; 
                 $quarter_4  = '26/12/2023'; 
-            @endphp
-            @if($date_now >= $quarter_1 || $date_now >= $quarter_2 || $date_now >= $quarter_3 || $date_now >= $quarter_4)
+            @endphp --}}
+            {{-- @if($date_now >= $quarter_1 || $date_now >= $quarter_2 || $date_now >= $quarter_3 || $date_now >= $quarter_4) --}}
                 <li class="menu-item">
                     <a href="{{url('/staff/list-employee-evaluate')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-news"></i>
                         <div data-i18n="Account">ทำแบบประเมินพนักงาน</div>
                     </a>
                 </li>
-            @else 
+            {{-- @else 
                 <li class="menu-item">
                     <a href="" class="menu-link">
                         <p style="color:red;">ยังไม่เปิดระบบประเมินพนักงาน</p>
                     </a>
                 </li>
-            @endif
+            @endif --}}
         @endif
         {{-- @if($position != "MANAGER")
             <li class="menu-item">

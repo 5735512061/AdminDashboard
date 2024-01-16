@@ -24,7 +24,7 @@
                                     ->orderBy('id', 'desc')
                                     ->first();
                             @endphp
-
+                            
                             @if ($dayoff != null)
                                 <div>
                                     <i class="ni education_hat mr-2"></i>วันหยุดที่ได้รับ : {{ $dayoff->dayoff }} วัน/ปี
@@ -91,6 +91,7 @@
                         $fundStr = number_format($fundStr);
                     }
                 @endphp
+                
                 <div class="card">
                     <h5 class="card-header">ข้อมูลการทำงานแต่ละเดือน</h5>
                     <div class="table-responsive text-nowrap">
@@ -224,11 +225,11 @@
                                             $skill = (int) $skill;
 
                                             if ($value->late == 0 && $value->absence == 0) {
-                                                $salary_equal = $salary_equal + 1000 + $charge + $skill - $insurance - $deduct;
+                                                $salary = $salary + 1000 + $charge + $skill - $insurance - $deduct;
                                             } elseif ($value->late != 0 || $value->absence != 0) {
-                                                $salary_equal = $salary_equal + $charge + $skill - $insurance - $deduct;
+                                                $salary = $salary + $charge + $skill - $insurance - $deduct;
                                             }
-                                            $salary_equal = number_format($salary_equal);
+                                            $salary = number_format($salary);
                                         @endphp
 
                                         @if ($value->month_ == $month_equal)

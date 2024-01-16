@@ -384,12 +384,14 @@ class StaffController extends Controller
             $date = Carbon::now()->format('d/m/Y');
             $evaluation_id = $key;
             $rate = $value;
+            $comment = $request->get('comment');
 
             $rate_data = new EmployeeRate;
             $rate_data->employee_id = $employee_id;
             $rate_data->evaluation_id = $evaluation_id;
             $rate_data->rate = $rate;
             $rate_data->date = $date;
+            $rate_data->comment = $comment;
             $rate_data->save();
         }
         return redirect()->action('Frontend\\StaffController@listEmployeeEvaluate');
