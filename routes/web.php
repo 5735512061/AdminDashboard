@@ -95,6 +95,14 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/edit-form-manager-evaluate','Backend\\AdminController@editFormManagerEvaluate');
     Route::get('/list-manager-evaluate/{branch_id}','Backend\\AdminController@listManagerEvaluate');
 
+    // checklist sop
+    Route::get('/form-checklist-sop/{branch_id}','Backend\\AdminController@formChecklistSOP');
+    Route::post('/create-form-checklist-sop','Backend\\AdminController@createFormChecklistSOP');
+    Route::post('/edit-form-checklist-sop','Backend\\AdminController@editFormChecklistSOP');
+    Route::get('/title-sop/{branch_id}','Backend\\AdminController@titleSOP');
+    Route::post('/create-title-sop','Backend\\AdminController@createTitleSOP');
+    Route::post('/edit-title-sop','Backend\\AdminController@editTitleSOP');
+    Route::get('/checklist-sop/{branch_id}','Backend\\AdminController@ChecklistSOP');
 
     // เกี่ยวกับข้อมูลข่าวสาร / ใบเตือน
     Route::get('/create-news','Backend\\AdminController@createNews');
@@ -128,6 +136,12 @@ Route::group(['prefix' => 'staff'], function(){
     Route::get('/list-employee-evaluate','Frontend\\StaffController@listEmployeeEvaluate');
     Route::get('/from-employee-evaluate/{id}','Frontend\\StaffController@formEmployeeEvaluate');
     Route::post('/from-employee-evaluate','Frontend\\StaffController@formEmployeeEvaluatePost');
+
+    // SOP
+    Route::get('/check-list-sop','Frontend\\StaffController@checkListSOP');
+    Route::get('/check-list-sop-chef','Frontend\\StaffController@checkListSOPChef');
+    Route::post('/from-checklist-sop','Frontend\\StaffController@formChecklistSOP');
+    Route::post('/from-checklist-sop-chef','Frontend\\StaffController@formChecklistSOPChef');
 
     // กฎระเบียบของบริษัท
     Route::get('/rules','Frontend\\StaffController@rules');

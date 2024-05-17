@@ -21,6 +21,9 @@ use App\Model\Fund;
 use App\Model\Leave;
 use App\Model\LeaveApproval;
 use App\Model\Warning;
+use App\Model\ListSop;
+use App\Model\TitleSop;
+use App\Model\CheckListSop;
 
 use App\Admin;
 use App\Employee;
@@ -927,6 +930,70 @@ class AdminController extends Controller
                                                                    ->with('managers',$managers)
                                                                    ->with('dateNow',$dateNow)
                                                                    ->with('branch_id',$branch_id);
+    }
+
+    // checklist sop
+    public function formChecklistSOP(Request $request, $branch_id) { 
+        $NUM_PAGE = 20;
+        $checklists = ListSop::orderBy('set','desc')->get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/checklist/create-form-checklist-sop')->with('NUM_PAGE',$NUM_PAGE)
+                                                                        ->with('page',$page)
+                                                                        ->with('branch_id',$branch_id)
+                                                                        ->with('checklists',$checklists);
+    }
+
+    public function createFormChecklistSOP(Request $request) {
+        $checklist = $request->all();
+        $checklist = ListSop::create($checklist);
+        $request->session()->flash('alert-success', 'เพิ่มหัวข้อ SOP สำเร็จ');
+        return back();
+    }
+
+    public function editFormChecklistSOP(Request $request) {
+        $id = $request->get('id');
+        $checklist = ListSop::findOrFail($id);
+        $checklist->update($request->all());
+        $request->session()->flash('alert-success', 'แก้ไขข้อมูลสำเร็จ');
+        return redirect()->action('Backend\\AdminController@formChecklistSOP',['branch_id'=>session('branch_id')]); 
+    }
+
+    public function titleSOP(Request $request, $branch_id) {
+        $NUM_PAGE = 20;
+        $titles = TitleSop::get();
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/checklist/title-sop')->with('NUM_PAGE',$NUM_PAGE)
+                                                        ->with('page',$page)
+                                                        ->with('branch_id',$branch_id)
+                                                        ->with('titles',$titles);
+    }  
+
+    public function createTitleSOP(Request $request) {
+        $title = $request->all();
+        $title = TitleSop::create($title);
+        $request->session()->flash('alert-success', 'เพิ่มหัวข้อหลักสำเร็จ');
+        return back();
+    }
+
+    public function editTitleSOP(Request $request) {
+        $id = $request->get('id');
+        $title = TitleSop::findOrFail($id);
+        $title->update($request->all());
+        $request->session()->flash('alert-success', 'แก้ไขข้อมูลสำเร็จ');
+        return redirect()->action('Backend\\AdminController@titleSOP',['branch_id'=>session('branch_id')]); 
+    }
+
+    public function checklistSOP(Request $request, $branch_id) { 
+        $NUM_PAGE = 20;
+        $checklists = CheckListSop::orderBy('created_at','desc')->paginate($NUM_PAGE);
+        $page = $request->input('page');
+        $page = ($page != null)?$page:1;
+        return view('backend/admin/checklist/checklist-sop')->with('NUM_PAGE',$NUM_PAGE)
+                                                            ->with('page',$page)
+                                                            ->with('branch_id',$branch_id)
+                                                            ->with('checklists',$checklists);
     }
 
     // เกี่ยวกับข้อมูลข่าวสาร / ใบเตือน

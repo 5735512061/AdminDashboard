@@ -108,7 +108,7 @@
                             @if($salary != NULL)
                                 <input class="form-control" type="text" value="เงินเดือนปัจจุบัน : {{number_format((float)$salary->salary)}} บาท"/>
                             @else 
-                                <a href="{{url('/admin/salary-by-branch')}}/{{$value->branch_id}}">กรอกเงินเดือน</a>
+                                <a href="{{url('/admin/salary-by-branch')}}/{{$staff->branch_id}}">กรอกเงินเดือน</a>
                             @endif
                         </div>
                         <div class="mb-3 mt-3 col-md-12">

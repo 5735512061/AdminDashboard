@@ -168,6 +168,30 @@
           </li>
         </ul>
       </li>
+      <li class="menu-header small text-uppercase"><span class="menu-header-text">Checklist SOP</span></li>
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-list-ul"></i>
+          <div>SOP</div>
+        </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{url('/admin/title-sop')}}/{{$branch_id}}" class="menu-link">
+              <div>หัวข้อหลัก</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{url('/admin/form-checklist-sop')}}/{{$branch_id}}" class="menu-link">
+              <div>รายการตรวจเช็ค SOP</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{url('/admin/checklist-sop')}}/{{$branch_id}}" class="menu-link">
+              <div>ผลการตรวจเช็ค SOP</div>
+            </a>
+          </li>
+        </ul>
+      </li>
       <li class="menu-header small text-uppercase"><span class="menu-header-text">เกี่ยวกับข้อมูลข่าวสาร / ใบเตือน</span></li>
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
